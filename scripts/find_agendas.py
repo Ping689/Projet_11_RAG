@@ -1,5 +1,3 @@
-"""Search public OpenAgenda agendas to identify a useful agenda UID."""
-
 from __future__ import annotations
 
 import argparse
@@ -14,17 +12,17 @@ from app.openagenda_client import OpenAgendaClient
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Search OpenAgenda agendas.")
+    parser = argparse.ArgumentParser(description="Recherche des agendas OpenAgenda.")
     parser.add_argument(
         "--search",
         default="Paris culture",
-        help="Text search used against OpenAgenda agendas.",
+        help="Texte de recherche utilisé sur les agendas OpenAgenda.",
     )
     parser.add_argument(
         "--size",
         type=int,
         default=10,
-        help="Maximum number of agendas to display.",
+        help="Nombre maximal d'agendas à afficher.",
     )
     return parser.parse_args()
 
@@ -38,7 +36,7 @@ def main() -> None:
 
     agendas = payload.get("agendas", [])
     if not agendas:
-        print("No agenda found.")
+        print("Aucun agenda trouvé.")
         return
 
     for agenda in agendas:
@@ -46,7 +44,7 @@ def main() -> None:
         uid = agenda.get("uid")
         description = agenda.get("description", "")
         print(f"UID: {uid}")
-        print(f"Title: {title}")
+        print(f"Titre: {title}")
         if description:
             print(f"Description: {description[:180]}")
         print("-" * 60)

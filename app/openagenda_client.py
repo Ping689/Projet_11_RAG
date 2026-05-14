@@ -1,5 +1,3 @@
-"""HTTP client helpers for OpenAgenda."""
-
 from __future__ import annotations
 
 from typing import Any
@@ -38,6 +36,15 @@ class OpenAgendaClient:
         params: dict[str, Any],
     ) -> dict[str, Any]:
         response = self._client.get(f"/agendas/{agenda_uid}/events", params=params)
+        response.raise_for_status()
+        return response.json()
+
+    def list_public_events(
+        self,
+        *,
+        params: dict[str, Any],
+    ) -> dict[str, Any]:
+        response = self._client.get("/events", params=params)
         response.raise_for_status()
         return response.json()
 

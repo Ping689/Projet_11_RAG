@@ -1,5 +1,3 @@
-"""Normalize raw OpenAgenda events for vectorization and testing."""
-
 from __future__ import annotations
 
 import argparse
@@ -18,32 +16,19 @@ from app.config import get_settings
 
 RAW_DIR = ROOT_DIR / "data" / "raw"
 PROCESSED_DIR = ROOT_DIR / "data" / "processed"
-DEFAULT_ALLOWED_CITIES_BY_AGENDA = {
-    "95716291": {
-        "Bagnolet",
-        "Bobigny",
-        "Bondy",
-        "Le Pre-Saint-Gervais",
-        "Les Lilas",
-        "Montreuil",
-        "Noisy-le-Sec",
-        "Pantin",
-        "Romainville",
-    }
-}
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Preprocess OpenAgenda events.")
+    parser = argparse.ArgumentParser(description="Prétraite les événements OpenAgenda.")
     parser.add_argument(
         "--input",
         default="openagenda_events_raw.json",
-        help="Input filename under data/raw.",
+        help="Nom du fichier d'entrée dans data/raw.",
     )
     parser.add_argument(
         "--output",
         default="openagenda_events_processed.json",
-        help="Output filename under data/processed.",
+        help="Nom du fichier de sortie dans data/processed.",
     )
     return parser.parse_args()
 
@@ -56,17 +41,14 @@ def normalize_text(value: str | None) -> str:
     return ascii_only.replace("'", "-").replace(" ", "-").strip().lower()
 
 
-def resolve_allowed_cities(agenda_uid: str, configured: str | None) -> set[str]:
+def resolve_allowed_cities(configured: str | None) -> set[str]:
     if configured:
         return {
             normalize_text(city)
             for city in configured.split(",")
             if city.strip()
         }
-    return {
-        normalize_text(city)
-        for city in DEFAULT_ALLOWED_CITIES_BY_AGENDA.get(agenda_uid, set())
-    }
+    return set()
 
 
 def filter_timings(
@@ -92,6 +74,7 @@ def build_event_text(event: dict[str, Any]) -> str:
     description = event.get("description", "")
     long_description = event.get("longDescription", "")
     location = event.get("location") or {}
+    agenda = event.get("agenda") or {}
     city = location.get("city", "")
     region = location.get("region", "")
     keywords = ", ".join(event.get("keywords", []))
@@ -102,6 +85,7 @@ def build_event_text(event: dict[str, Any]) -> str:
         f"Description longue: {long_description}",
         f"Ville: {city}",
         f"Region: {region}",
+        f"Agenda source: {agenda.get('title', '')}",
         f"Mots-cles: {keywords}",
     ]
     return "\n".join(part for part in parts if part.split(": ", 1)[1].strip())
@@ -110,10 +94,14 @@ def build_event_text(event: dict[str, Any]) -> str:
 def normalize_event(event: dict[str, Any]) -> dict[str, Any]:
     location = event.get("location") or {}
     timings = event.get("timings") or []
+    agenda = event.get("agenda") or {}
 
     return {
         "uid": event.get("uid"),
         "slug": event.get("slug"),
+        "agenda_uid": agenda.get("uid") or event.get("agendaUid") or event.get("agendaUID"),
+        "agenda_title": agenda.get("title"),
+        "agenda_slug": agenda.get("slug"),
         "title": event.get("title"),
         "description": event.get("description"),
         "long_description": event.get("longDescription"),
@@ -143,10 +131,10 @@ def main() -> None:
 
     payload = json.loads(input_path.read_text(encoding="utf-8"))
     filters = payload.get("filters", {})
-    agenda_uid = str(payload.get("agenda_uid", ""))
+    agenda_uid = str(payload.get("agenda_uid") or "")
     start_at = datetime.fromisoformat(filters["timings_gte"].replace("Z", "+00:00"))
     end_at = datetime.fromisoformat(filters["timings_lte"].replace("Z", "+00:00"))
-    allowed_cities = resolve_allowed_cities(agenda_uid, settings.openagenda_allowed_cities)
+    allowed_cities = resolve_allowed_cities(settings.openagenda_allowed_cities)
 
     processed_events: list[dict[str, Any]] = []
     for event in payload.get("events", []):
@@ -159,7 +147,7 @@ def main() -> None:
 
         location = event_copy.get("location") or {}
         city_normalized = normalize_text(location.get("city"))
-        if allowed_cities and city_normalized and city_normalized not in allowed_cities:
+        if allowed_cities and city_normalized not in allowed_cities:
             continue
 
         processed_events.append(normalize_event(event_copy))
@@ -168,12 +156,14 @@ def main() -> None:
     output = {
         "source_file": str(input_path),
         "agenda_uid": agenda_uid,
+        "agenda_uids": payload.get("agenda_uids", []),
+        "collection_mode": payload.get("collection_mode", "agenda"),
         "filters": filters,
         "total_events": len(processed_events),
         "events": processed_events,
     }
     output_path.write_text(json.dumps(output, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"Saved {len(processed_events)} processed events to {output_path}")
+    print(f"{len(processed_events)} événements prétraités enregistrés dans {output_path}")
 
 
 if __name__ == "__main__":
