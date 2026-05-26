@@ -7,30 +7,25 @@
 ## Étape 1 - Préparation de l'environnement
 
 1. Créer l'environnement virtuel :
-
+```bash
 python -m venv .venv
-
+```
 2. Activer l'environnement :
-
+```bash
 .\.venv\Scripts\Activate.ps1
-
+```
 3. Installer les dépendances :
-
+```bash
 python -m pip install -r requirements.txt
-
+```
 4. Configurer les variables d'environnement :
-
+```bash
 Copy-Item .env.example .env
-
+```
 5. Vérifier les imports :
-
+```bash
 python scripts/check_env.py
-
-## Notes
-
-- Pour l'intégration Mistral AI, on utilise `mistralai` et `langchain-mistralai`.
-- La lecture du fichier `.env` peut se faire avec `python-dotenv`.
-- Le package `mistral` mentionné dans certains supports n'est pas le SDK recommandé pour l'API Mistral AI.
+```
 
 ## Étape 2 - OpenAgenda
 
@@ -45,41 +40,41 @@ OPENAGENDA_SEARCH=culture,concert,exposition,spectacle,musee,theatre,festival
 OPENAGENDA_LANGUAGE=fr
 ```
 2. Rechercher un agenda :
-
+```bash
 python scripts/find_agendas.py --search "Paris culture"
-
+```
 Copier ensuite un ou plusieurs `UID` dans `.env` :
 
 Par exemple :
 OPENAGENDA_AGENDA_UIDS=95716291,12345678
 
 3. Récupérer les événements culturels de Paris depuis un ou plusieurs agendas OpenAgenda :
-
+```bash
 python scripts/fetch_openagenda.py
-
+```
 Le script utilise `GET /v2/agendas/{agendaUID}/events` avec les UID configurés dans `OPENAGENDA_AGENDA_UIDS`.
 Il est aussi possible de passer un UID directement :
-
+```bash
 python scripts/fetch_openagenda.py --agenda-uid 95716291
-
+```
 Pour élargir ou affiner la collecte, modifier `OPENAGENDA_SEARCH` ou passer plusieurs recherches :
-
+```bash
 python scripts/fetch_openagenda.py --search "concert" --search "exposition" --search "théâtre"
-
+```
 4. Prétraiter les événements :
-
+```bash
 python scripts/preprocess_events.py
-
+```
 5. Lancer les tests de périmètre :
-
+```bash
 python -m pytest tests/test_events_scope.py
-
+```
 ## Étape 3 - Index FAISS
 
 1. Construire les chunks, calculer les embeddings Mistral et générer l'index FAISS :
-
+```bash
 python scripts/build_faiss_index.py
-
+```
 2. Les fichiers générés sont écrits dans `data/vector_store/` :
 
 ```text
@@ -88,33 +83,33 @@ openagenda_metadata.json
 ```
 
 3. Lancer les tests de l'indexation :
-
+```bash
 python -m pytest tests/test_vector_store.py
-
+```
 ## Étape 4 - Chatbot RAG LangChain
 
 1. Poser une question au chatbot :
-
+```bash
 python scripts/chatbot_demo.py --question "Quels événements culturels recommander pour des enfants à Paris ?"
-
+```
 2. Lancer le mode interactif :
-
+```bash
 python scripts/chatbot_demo.py
-
+```
 3. Lancer les tests du pipeline RAG :
-
+```bash
 python -m pytest tests/test_rag_chain.py
-
+```
 ## API de test Q/R
 
 1. Lancer l'API :
-
+```bash
 python -m uvicorn app.api:app --reload --port 8001
-
+```
 2. Ouvrir la documentation interactive dans le navigateur :
-
+```text
 http://127.0.0.1:8001/docs
-
+```
 Dans Swagger, ouvrir `POST /ask`, cliquer sur `Try it out`, puis envoyer un corps JSON comme :
 
 ```json
@@ -142,9 +137,9 @@ http://127.0.0.1:8001/health
 ## Interface Streamlit Q/R
 
 Lancer l'interface web locale :
-
+```bash
 python -m streamlit run app/streamlit_app.py
-
+```
 Streamlit ouvre ensuite une page locale dans le navigateur :
 
 ```text
@@ -152,6 +147,7 @@ http://localhost:8501
 ```
 ## Note sur le pipeline complet :
 
+```text
 fetch_openagenda.py
   ↓
 data/raw/openagenda_events_raw.json
@@ -166,15 +162,16 @@ data/vector_store/openagenda.faiss
 data/vector_store/openagenda_metadata.json
   ↓
 chatbot_demo.py / API / Streamlit
+```
 
 ## Phase 3 - Évaluation
 
 Cette phase permet de vérifier la qualité du chatbot RAG à partir d'un jeu de questions/réponses annotées. L'objectif est de contrôler que le système retrouve les bonnes sources dans l'index FAISS et que les réponses générées contiennent les informations attendues.
 
 1. Lancer l'évaluation annotée :
-
+```bash
 python scripts/evaluate_rag.py
-
+```
 Le script utilise par défaut :
 
 - le jeu d'évaluation : `data/eval/qa_dataset.json`
