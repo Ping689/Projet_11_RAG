@@ -164,7 +164,7 @@ data/vector_store/openagenda_metadata.json
 chatbot_demo.py / API / Streamlit
 ```
 
-## Phase 3 - Évaluation
+## Étape 5 - Évaluation
 
 Cette phase permet de vérifier la qualité du chatbot RAG à partir d'un jeu de questions/réponses annotées. L'objectif est de contrôler que le système retrouve les bonnes sources dans l'index FAISS et que les réponses générées contiennent les informations attendues.
 
