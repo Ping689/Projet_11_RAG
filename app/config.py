@@ -8,7 +8,17 @@ from dotenv import load_dotenv
 
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
-load_dotenv(ROOT_DIR / ".env")
+load_dotenv(ROOT_DIR / ".env", override=True)
+
+
+def _disable_broken_local_proxy() -> None:
+    broken_proxy = "http://127.0.0.1:9"
+    for name in ("HTTP_PROXY", "HTTPS_PROXY", "ALL_PROXY", "http_proxy", "https_proxy", "all_proxy"):
+        if os.getenv(name) == broken_proxy:
+            os.environ.pop(name, None)
+
+
+_disable_broken_local_proxy()
 
 
 @dataclass(frozen=True)
@@ -17,7 +27,6 @@ class Settings:
     mistral_embedding_model: str
     mistral_chat_model: str
     openagenda_api_key: str | None
-    openagenda_agenda_uid: str | None
     openagenda_agenda_uids: str | None
     openagenda_region: str
     openagenda_city: str
@@ -32,7 +41,6 @@ def get_settings() -> Settings:
         mistral_embedding_model=os.getenv("MISTRAL_EMBEDDING_MODEL", "mistral-embed"),
         mistral_chat_model=os.getenv("MISTRAL_CHAT_MODEL", "mistral-small-latest"),
         openagenda_api_key=os.getenv("OPENAGENDA_API_KEY"),
-        openagenda_agenda_uid=os.getenv("OPENAGENDA_AGENDA_UID"),
         openagenda_agenda_uids=os.getenv("OPENAGENDA_AGENDA_UIDS"),
         openagenda_region=os.getenv("OPENAGENDA_REGION", "Ile-de-France"),
         openagenda_city=os.getenv("OPENAGENDA_CITY", "Paris"),

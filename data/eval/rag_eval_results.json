@@ -1,0 +1,279 @@
+{
+  "evaluated_at": "2026-05-26T10:26:52+00:00",
+  "dataset": "openagenda_paris_rag_eval_v1",
+  "total_questions": 6,
+  "source_hit_rate": 0.3333333333333333,
+  "average_keyword_coverage": 0.7777777777777777,
+  "results": [
+    {
+      "id": "qa_001",
+      "question": "Quels concerts peut-on voir à Paris ?",
+      "reference_answer": "Recommander des concerts à Paris, par exemple McDonnell Trio, Concert electro de Daithi ou la Fête de la Musique avec l'Orchestre de Miroslav Dunisijevic.",
+      "generated_answer": "Voici les concerts à Paris mentionnés dans le contexte :\n\n**Concerts de l'été**\n- **Saxophone et Guitare** – Paris, 19 juillet 2025 à 15h30\n- **Grand orchestre de cuivres d'harmonie** – Paris, 31 juillet 2025 à 15h\n- **Chants traditionnels et cantiques bretons et celtiques** – Paris, 10 août 2025 à 15h30\n- **Duo de violoncelles baroques** – Paris, 15 août 2025 à 16h\n\n**Autres concerts**\n- **Concert de Noël** (chorales enfants/adultes) – Paris, 7 décembre 2025 à 16h\n- **Concert Gospel Colors** – Paris, 19 juin 2026 à 20h30\n- **Concert d'orgue et visite de la tribune** (Journées Européennes du Patrimoine) – Paris, 20 septembre 2025 à 15h",
+      "source_hit": false,
+      "keyword_coverage": 0.6666666666666666,
+      "retrieved_sources": [
+        {
+          "event_uid": "74946354",
+          "title": "Concerts de l'été",
+          "city": "Paris",
+          "first_timing_begin": "2025-07-19T15:30:00+02:00",
+          "score": 0.8098262548446655
+        },
+        {
+          "event_uid": "46768897",
+          "title": "Concert de Noël",
+          "city": "Paris",
+          "first_timing_begin": "2025-12-18T20:00:00+01:00",
+          "score": 0.8003458380699158
+        },
+        {
+          "event_uid": "64240128",
+          "title": "Concert Gospel Colors",
+          "city": "Paris",
+          "first_timing_begin": "2026-06-19T20:30:00+02:00",
+          "score": 0.7972606420516968
+        },
+        {
+          "event_uid": "55485850",
+          "title": "Concert de Noël",
+          "city": "Paris",
+          "first_timing_begin": "2025-12-07T16:00:00+01:00",
+          "score": 0.7970271110534668
+        },
+        {
+          "event_uid": "86596698",
+          "title": "Concert d'orgue et visite de la tribune - Journées Européennes du Patrimoine 2025",
+          "city": "Paris",
+          "first_timing_begin": "2025-09-20T15:00:00+02:00",
+          "score": 0.7969435453414917
+        }
+      ]
+    },
+    {
+      "id": "qa_002",
+      "question": "Quelles expositions sont proposées à Paris ?",
+      "reference_answer": "Le corpus contient des expositions à Paris comme Ile de Jeju, vivre avec la mer, Histoires croisées et Autres territoires.",
+      "generated_answer": "Voici les expositions proposées à Paris selon le contexte fourni :\n\n1. **\"Contraste et indifférence\"** – Paris (11 février 2026)\n   *Art contemporain, écologie et tensions mondiales.*\n\n2. **\"Pixels et poétique : Sudek, Funke et l’impact des nouvelles technologies sur la photographie\"** – Paris (26 mars 2026)\n   *Photographie analogique vs numérique, avec visite guidée et concert.*\n\n3. **\"Couleurs de Corée\"** – Paris (24 octobre 2025)\n   *Exposition immersive d’art contemporain coréen.*\n\n4. **\"Mai-Thu Perret - Othermothers\"** – Paris (26 mars 2026)\n   *Arts visuels.*\n\n*Source : Base FAISS de Puls-Events.*",
+      "source_hit": false,
+      "keyword_coverage": 1.0,
+      "retrieved_sources": [
+        {
+          "event_uid": "12108154",
+          "title": "Vernissage de l’exposition \"Contraste et indifférence\" - Larissa Fassler, Cécile Hartmann, Isabelle Hayeur, Capucine Vever",
+          "city": "Paris",
+          "first_timing_begin": "2026-02-11T18:00:00+01:00",
+          "score": 0.8525334596633911
+        },
+        {
+          "event_uid": "52390676",
+          "title": "Exclusif : Visite guidée + concert",
+          "city": "Paris",
+          "first_timing_begin": "2026-04-16T18:00:00+02:00",
+          "score": 0.8326433897018433
+        },
+        {
+          "event_uid": "95690456",
+          "title": "Exposition Pixels et poétique",
+          "city": "Paris",
+          "first_timing_begin": "2026-03-26T18:00:00+01:00",
+          "score": 0.8313039541244507
+        },
+        {
+          "event_uid": "80033850",
+          "title": "Exposition immersive « Couleurs de Corée »",
+          "city": "Paris",
+          "first_timing_begin": "2025-10-24T10:00:00+02:00",
+          "score": 0.8305675983428955
+        },
+        {
+          "event_uid": "32832673",
+          "title": "Mai-Thu Perret - Othermothers",
+          "city": "Paris",
+          "first_timing_begin": "2026-03-26T14:00:00+01:00",
+          "score": 0.8287426233291626
+        }
+      ]
+    },
+    {
+      "id": "qa_003",
+      "question": "Je cherche des activités pour enfants à Paris.",
+      "reference_answer": "Des activités jeunesse à Paris incluent le Festival Reves d'enfants, par exemple le Cine-Concert Architect A, Le carnaval des animaux ou un atelier-spectacle autour des percussions coréennes.",
+      "generated_answer": "Voici une activité adaptée aux enfants à Paris trouvée dans le contexte :\n\n**EXPLORE LE MONDE À TRAVERS PARIS**\n- **Ville** : Paris\n- **Date** : 17 septembre 2025 (15h-18h)\n- **Description** : Parcours exclusif pour les jeunes explorateurs (découverte de lieux culturels comme le Centre Culturel Canadien, l’Ambassade d’Estonie, le Goethe-Institut et le Centre Culturel d’Ukraine).\n\n*Aucune autre activité pour enfants n’est mentionnée dans le contexte fourni.*",
+      "source_hit": false,
+      "keyword_coverage": 0.6666666666666666,
+      "retrieved_sources": [
+        {
+          "event_uid": "83089763",
+          "title": "L'Amour à travers les époques",
+          "city": "Paris",
+          "first_timing_begin": "2025-10-29T19:30:00+01:00",
+          "score": 0.7918009757995605
+        },
+        {
+          "event_uid": "25901552",
+          "title": "EXPLORE LE MONDE À TRAVERS PARIS",
+          "city": "Paris",
+          "first_timing_begin": "2025-09-17T15:00:00+02:00",
+          "score": 0.7761554718017578
+        },
+        {
+          "event_uid": "12108154",
+          "title": "Vernissage de l’exposition \"Contraste et indifférence\" - Larissa Fassler, Cécile Hartmann, Isabelle Hayeur, Capucine Vever",
+          "city": "Paris",
+          "first_timing_begin": "2026-02-11T18:00:00+01:00",
+          "score": 0.7625361680984497
+        },
+        {
+          "event_uid": "59165818",
+          "title": "Mini concerts de l'avent",
+          "city": "Paris",
+          "first_timing_begin": "2025-12-06T18:00:00+01:00",
+          "score": 0.7623637914657593
+        },
+        {
+          "event_uid": "25901552",
+          "title": "EXPLORE LE MONDE À TRAVERS PARIS",
+          "city": "Paris",
+          "first_timing_begin": "2025-09-17T15:00:00+02:00",
+          "score": 0.7570840716362
+        }
+      ]
+    },
+    {
+      "id": "qa_004",
+      "question": "Y a-t-il des spectacles ou du théâtre à Paris ?",
+      "reference_answer": "Oui, le corpus mentionne des spectacles à Paris comme Le facteur de Nagasaki, Je_Burnt Offering et Jeju, l'ile benie des dieux.",
+      "generated_answer": "Oui, voici des spectacles et pièces de théâtre à Paris :\n\n1. **L'Amour à travers les époques** – Paris, 29 octobre 2025 (Théâtre de la Tour Eiffel)\n2. **« POUVOIR » de Une Tribu Collectif** – Paris, 18 septembre 2025 (Centre Wallonie-Bruxelles)\n3. **l'Echo des sables Maand, Raga et Kathak - Inde du nord** – Paris, 17 avril 2026 (Théâtre Mandapa)\n4. **Du Mandapa jusqu'au Toit du Monde - Tenzin Gönpo** – Paris, 11 avril 2026 (Théâtre Mandapa)\n5. **Lied Play : Là Callas** – Paris, 23 juin 2026",
+      "source_hit": false,
+      "keyword_coverage": 0.6666666666666666,
+      "retrieved_sources": [
+        {
+          "event_uid": "83089763",
+          "title": "L'Amour à travers les époques",
+          "city": "Paris",
+          "first_timing_begin": "2025-10-29T19:30:00+01:00",
+          "score": 0.8187555074691772
+        },
+        {
+          "event_uid": "45823535",
+          "title": "« POUVOIR » de Une Tribu Collectif",
+          "city": "Paris",
+          "first_timing_begin": "2025-09-18T21:00:00+02:00",
+          "score": 0.817895770072937
+        },
+        {
+          "event_uid": "70603401",
+          "title": "l'Echo des sables Maand, Raga et Kathak - Inde du nord",
+          "city": "Paris",
+          "first_timing_begin": "2026-04-17T20:30:00+02:00",
+          "score": 0.8167558908462524
+        },
+        {
+          "event_uid": "5302021",
+          "title": "Du Mandapa jusqu'au Toit du Monde - Tenzin Gönpo - Musique, chant et danse",
+          "city": "Paris",
+          "first_timing_begin": "2026-04-11T20:30:00+02:00",
+          "score": 0.8070414066314697
+        },
+        {
+          "event_uid": "34622151",
+          "title": "Lied Play : Là Callas",
+          "city": "Paris",
+          "first_timing_begin": "2026-06-23T19:00:00+02:00",
+          "score": 0.8061279058456421
+        }
+      ]
+    },
+    {
+      "id": "qa_005",
+      "question": "Quels évènements gratuits peut-on trouver à Paris ?",
+      "reference_answer": "Le corpus contient des évènements gratuits à Paris comme Explore le monde à travers Paris, la Fête de la Musique 2025 et Autres territoires.",
+      "generated_answer": "Voici des événements gratuits à Paris selon le contexte fourni :\n\n1. **Vernissage de l’exposition \"Contraste et indifférence\"** – Paris, 11 février 2026 (gratuit).\n2. **L'Amour à travers les époques** – Paris, 29 octobre 2025 (gratuit, inscription obligatoire).\n3. **Midsommar et Fête de la musique à l’Institut suédois** – Paris, 21 juin 2025 (entrée libre dans la limite des places).\n4. **EXPLORE LE MONDE À TRAVERS PARIS** – Paris, 17 septembre 2025 (gratuit pour les jeunes, avec le pass Culture).\n\n*Pour les deux derniers, vérifiez les conditions d’accès (places limitées ou public cible).*",
+      "source_hit": true,
+      "keyword_coverage": 1.0,
+      "retrieved_sources": [
+        {
+          "event_uid": "12108154",
+          "title": "Vernissage de l’exposition \"Contraste et indifférence\" - Larissa Fassler, Cécile Hartmann, Isabelle Hayeur, Capucine Vever",
+          "city": "Paris",
+          "first_timing_begin": "2026-02-11T18:00:00+01:00",
+          "score": 0.8031699061393738
+        },
+        {
+          "event_uid": "83089763",
+          "title": "L'Amour à travers les époques",
+          "city": "Paris",
+          "first_timing_begin": "2025-10-29T19:30:00+01:00",
+          "score": 0.7972925901412964
+        },
+        {
+          "event_uid": "49245839",
+          "title": "Midsommar et Fête de la musique à Institut suédois",
+          "city": "Paris",
+          "first_timing_begin": "2025-06-21T17:00:00+02:00",
+          "score": 0.7780716419219971
+        },
+        {
+          "event_uid": "25901552",
+          "title": "EXPLORE LE MONDE À TRAVERS PARIS",
+          "city": "Paris",
+          "first_timing_begin": "2025-09-17T15:00:00+02:00",
+          "score": 0.7732998132705688
+        },
+        {
+          "event_uid": "25901552",
+          "title": "EXPLORE LE MONDE À TRAVERS PARIS",
+          "city": "Paris",
+          "first_timing_begin": "2025-09-17T15:00:00+02:00",
+          "score": 0.7700885534286499
+        }
+      ]
+    },
+    {
+      "id": "qa_006",
+      "question": "Propose-moi des rencontres littéraires ou autour du livre à Paris.",
+      "reference_answer": "Des évènements autour du livre et de la littérature à Paris incluent Rencontres littéraires éclairs, La Nuit de la Littérature et A la rencontre des plumes de la littérature jeunesse.",
+      "generated_answer": "Voici deux événements littéraires à Paris :\n\n1. **Rencontres littéraires éclairs**\n   - **Ville** : Paris\n   - **Date** : 17 avril 2026 à 20h\n   - **Lieu** : Centre culturel canadien\n   - **Description** : Soirée avec 7 auteurs canadiens (Québec) autour de tables rondes et une séance de signatures à la Librairie du Québec à Paris. En marge du festival Livre Paris.\n\n2. **La Nuit de la Littérature**\n   - **Ville** : Paris\n   - **Date** : 30 mai 2026 à partir de 14h30\n   - **Lieu** : Bibliothèque patrimoniale (en intérieur en cas de pluie)\n   - **Description** : Lectures multilingues, échange de livres, restauration et concert folk en clôture. Événement gratuit.",
+      "source_hit": true,
+      "keyword_coverage": 0.6666666666666666,
+      "retrieved_sources": [
+        {
+          "event_uid": "28552852",
+          "title": "Rencontres littéraires éclairs",
+          "city": "Paris",
+          "first_timing_begin": "2026-04-17T20:00:00+02:00",
+          "score": 0.831134557723999
+        },
+        {
+          "event_uid": "28552852",
+          "title": "Rencontres littéraires éclairs",
+          "city": "Paris",
+          "first_timing_begin": "2026-04-17T20:00:00+02:00",
+          "score": 0.8279488682746887
+        },
+        {
+          "event_uid": "28552852",
+          "title": "Rencontres littéraires éclairs",
+          "city": "Paris",
+          "first_timing_begin": "2026-04-17T20:00:00+02:00",
+          "score": 0.8150861263275146
+        },
+        {
+          "event_uid": "62053936",
+          "title": "La Nuit de la Littérature",
+          "city": "Paris",
+          "first_timing_begin": "2026-05-30T14:30:00+02:00",
+          "score": 0.8122422695159912
+        },
+        {
+          "event_uid": "83089763",
+          "title": "L'Amour à travers les époques",
+          "city": "Paris",
+          "first_timing_begin": "2025-10-29T19:30:00+01:00",
+          "score": 0.8057301640510559
+        }
+      ]
+    }
+  ]
+}

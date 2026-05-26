@@ -170,6 +170,24 @@ def similarity_search(
 ) -> list[SearchResult]:
     query_vector = np.asarray([embeddings.embed_query(query)], dtype="float32")
     faiss.normalize_L2(query_vector)
+    return similarity_search_by_vector(
+        query_vector=query_vector,
+        index=index,
+        chunks=chunks,
+        top_k=top_k,
+        allowed_cities=allowed_cities,
+    )
+
+
+def similarity_search_by_vector(
+    *,
+    query_vector: np.ndarray,
+    index: faiss.Index,
+    chunks: list[EventChunk],
+    top_k: int = 5,
+    allowed_cities: set[str] | None = None,
+) -> list[SearchResult]:
+    faiss.normalize_L2(query_vector)
 
     if allowed_cities:
         normalized_cities = {normalize_text(city) for city in allowed_cities if city}

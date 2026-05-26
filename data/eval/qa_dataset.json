@@ -1,0 +1,54 @@
+{
+  "name": "openagenda_paris_rag_eval_v1",
+  "description": "Jeu de questions/reponses annotees pour evaluer le POC RAG Puls-Events sur les evenements culturels a Paris.",
+  "scope": {
+    "source": "OpenAgenda",
+    "city": "Paris",
+    "region": "Ile-de-France",
+    "generated_from": "data/processed/openagenda_events_processed.json"
+  },
+  "items": [
+    {
+      "id": "qa_001",
+      "question": "Quels concerts peut-on voir à Paris ?",
+      "reference_answer": "Recommander des concerts à Paris, par exemple McDonnell Trio, Concert electro de Daithi ou la Fête de la Musique avec l'Orchestre de Miroslav Dunisijevic.",
+      "expected_event_uids": ["35789801", "74737316", "51073261"],
+      "expected_keywords": ["concert", "Paris", "musique"]
+    },
+    {
+      "id": "qa_002",
+      "question": "Quelles expositions sont proposées à Paris ?",
+      "reference_answer": "Le corpus contient des expositions à Paris comme Ile de Jeju, vivre avec la mer, Histoires croisées et Autres territoires.",
+      "expected_event_uids": ["69169421", "78125410", "39065262"],
+      "expected_keywords": ["exposition", "Paris", "art"]
+    },
+    {
+      "id": "qa_003",
+      "question": "Je cherche des activités pour enfants à Paris.",
+      "reference_answer": "Des activités jeunesse à Paris incluent le Festival Reves d'enfants, par exemple le Cine-Concert Architect A, Le carnaval des animaux ou un atelier-spectacle autour des percussions coréennes.",
+      "expected_event_uids": ["34109021", "66170370", "14868309"],
+      "expected_keywords": ["enfants", "Paris", "festival"]
+    },
+    {
+      "id": "qa_004",
+      "question": "Y a-t-il des spectacles ou du théâtre à Paris ?",
+      "reference_answer": "Oui, le corpus mentionne des spectacles à Paris comme Le facteur de Nagasaki, Je_Burnt Offering et Jeju, l'ile benie des dieux.",
+      "expected_event_uids": ["33719060", "36354350", "46956234"],
+      "expected_keywords": ["spectacle", "theatre", "Paris"]
+    },
+    {
+      "id": "qa_005",
+      "question": "Quels évènements gratuits peut-on trouver à Paris ?",
+      "reference_answer": "Le corpus contient des évènements gratuits à Paris comme Explore le monde à travers Paris, la Fête de la Musique 2025 et Autres territoires.",
+      "expected_event_uids": ["25901552", "51073261", "39065262"],
+      "expected_keywords": ["gratuit", "Paris", "culture"]
+    },
+    {
+      "id": "qa_006",
+      "question": "Propose-moi des rencontres littéraires ou autour du livre à Paris.",
+      "reference_answer": "Des évènements autour du livre et de la littérature à Paris incluent Rencontres littéraires éclairs, La Nuit de la Littérature et A la rencontre des plumes de la littérature jeunesse.",
+      "expected_event_uids": ["28552852", "62053936", "31132510"],
+      "expected_keywords": ["litterature", "livre", "Paris"]
+    }
+  ]
+}

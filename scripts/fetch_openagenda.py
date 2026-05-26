@@ -29,11 +29,7 @@ def parse_args() -> argparse.Namespace:
         "--agenda-uid",
         action="append",
         default=None,
-        help=(
-            "UID d'agenda. Peut être répété. Par défaut, utilise OPENAGENDA_AGENDA_UIDS "
-            "ou OPENAGENDA_AGENDA_UID depuis .env. Si aucun UID n'est fourni, le script "
-            "utilise l'endpoint transverse /events d'OpenAgenda."
-        ),
+        help="UID d'agenda OpenAgenda. Peut etre repete. Par defaut, utilise OPENAGENDA_AGENDA_UIDS.",
     )
     parser.add_argument(
         "--search",
@@ -111,7 +107,7 @@ def build_initial_params(
 def fetch_all_events(
     client: OpenAgendaClient,
     params: dict[str, Any],
-    agenda_uid: str | None = None,
+    agenda_uid: str,
 ) -> list[dict[str, Any]]:
     events: list[dict[str, Any]] = []
     after: list[str] | None = None
@@ -121,10 +117,7 @@ def fetch_all_events(
         if after:
             current_params["after[]"] = after
 
-        if agenda_uid:
-            payload = client.list_events(agenda_uid, params=current_params)
-        else:
-            payload = client.list_public_events(params=current_params)
+        payload = client.list_events(agenda_uid, params=current_params)
         batch = payload.get("events", [])
         events.extend(batch)
         after = payload.get("after")
@@ -159,11 +152,10 @@ def main() -> None:
     args = parse_args()
     settings = get_settings()
 
-    agenda_uids = (
-        args.agenda_uid
-        or split_agenda_uids(settings.openagenda_agenda_uids)
-        or split_agenda_uids(settings.openagenda_agenda_uid)
-    )
+    agenda_uids = args.agenda_uid or split_agenda_uids(settings.openagenda_agenda_uids)
+    if not agenda_uids:
+        raise ValueError("OPENAGENDA_AGENDA_UIDS ou --agenda-uid est requis pour recuperer les evenements.")
+
     region = args.region or settings.openagenda_region
     city = args.city or settings.openagenda_city
     searches = args.search if args.search is not None else split_searches(settings.openagenda_search)
@@ -173,9 +165,8 @@ def main() -> None:
 
     with OpenAgendaClient(settings.openagenda_api_key or "") as client:
         events_by_key: dict[str, dict[str, Any]] = {}
-        agenda_scope = agenda_uids or [None]
         search_scope = searches or [None]
-        for agenda_uid in agenda_scope:
+        for agenda_uid in agenda_uids:
             for search in search_scope:
                 params = build_initial_params(
                     region=region,
@@ -196,7 +187,7 @@ def main() -> None:
         "fetched_at": isoformat_z(now),
         "agenda_uid": agenda_uids[0] if len(agenda_uids) == 1 else None,
         "agenda_uids": agenda_uids,
-        "collection_mode": "agendas" if agenda_uids else "openagenda_transverse",
+        "collection_mode": "agendas",
         "filters": {
             "region": region,
             "city": city,
