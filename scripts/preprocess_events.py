@@ -77,14 +77,18 @@ def build_event_text(event: dict[str, Any]) -> str:
     agenda = event.get("agenda") or {}
     city = location.get("city", "")
     region = location.get("region", "")
+    location_name = location.get("name", "")
+    address = location.get("address", "")
     keywords = ", ".join(event.get("keywords", []))
 
     parts = [
         f"Titre: {title}",
-        f"Description courte: {description}",
-        f"Description longue: {long_description}",
+        f"Lieu: {location_name}",
+        f"Adresse: {address}",
         f"Ville: {city}",
         f"Region: {region}",
+        f"Description courte: {description}",
+        f"Description longue: {long_description}",
         f"Agenda source: {agenda.get('title', '')}",
         f"Mots-cles: {keywords}",
     ]
